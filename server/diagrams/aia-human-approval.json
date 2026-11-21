@@ -1,0 +1,122 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-human-approval",
+  "title": "Human Approval, CIBA, Consent, and Step-Up",
+  "lede": "Pause a high-impact action, return control to the customer, and bind the approval to the exact action that resumes.",
+  "groups": {
+    "g1": {
+      "label": "Digital Assistant",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "Authorize",
+      "color": "green"
+    },
+    "g3": {
+      "label": "Customer channel",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "Transfer tool",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Digital Assistant",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Agent",
+        "Requests high-impact action"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "Authorize",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Policy",
+        "Returns escalation"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "Customer channel",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Human",
+        "Approves exact intent"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "Transfer tool",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Resource",
+        "Consumes approval once"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Action requires approval"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "Challenge the customer"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "Bind approval"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "Resume once"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Action requires approval",
+      "what": "Policy returns an escalation obligation for the transfer. (authorize)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. Challenge the customer",
+      "what": "CIBA or MFA reaches the customer’s registered channel. (authenticate)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. Bind approval",
+      "what": "The receipt is tied to amount, destination, actor, and expiry. (authorize)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. Resume once",
+      "what": "The exact paused call continues and a replay is rejected. (govern)",
+      "edges": [
+        3
+      ]
+    }
+  ]
+}

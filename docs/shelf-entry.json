@@ -1,0 +1,26 @@
+{
+  "demos": [
+    {
+      "id": "agent-identity-academy",
+      "name": "Agent Identity Academy",
+      "kind": "Demo",
+      "description": "Standalone port of the Agent Identity Academy: 13 lessons, one per agent type and per control, each with a frame-by-frame evidence reel, mock claim diffs and a diagram-studio diagram, over the discover/register/authenticate/authorize/govern lifecycle. Mock-only by design; every token is a labelled mock sample.",
+      "url": "http://localhost:7831",
+      "healthPath": "/api/health",
+      "composeFile": "agent-identity-academy-LAB/docker-compose.yml",
+      "composeOverlays": [],
+      "pingProducts": [],
+      "notes": "Host-run: ./scripts/run.sh (port 7831). Mock needs no tenant and no credentials. Docker: docker compose up -d --build (published on 127.0.0.1 only). Mock-only by design: no live mode, zero outbound calls in any mode; AIA_MODE_REAL=1 only enables the rule-19 Real switch. Derived from the AI-DEMO2 Academy prototype, rewritten customer-neutral.",
+      "repo": "https://github.com/curtismu7/agent-identity-academy-LAB",
+      "catalogId": "D142",
+      "alsoCatalogIds": [],
+      "tags": [
+        "agent-identity",
+        "ai-agent-security",
+        "learning",
+        "simulated"
+      ],
+      "where": "installed"
+    }
+  ]
+}

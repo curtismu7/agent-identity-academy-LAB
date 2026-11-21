@@ -1,0 +1,134 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-personal-agent",
+  "title": "Consumer Agent: Personal Agent",
+  "lede": "Connect an external agent such as a consumer AI assistant without pretending the enterprise owns its reasoning runtime.",
+  "groups": {
+    "g1": {
+      "label": "Customer device",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "Personal Agent",
+      "color": "green"
+    },
+    "g3": {
+      "label": "OAuth and MCP",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "Loyalty tools",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Customer device",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Endpoint",
+        "Runs the external agent"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "Personal Agent",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Agent",
+        "Not enterprise controlled"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "OAuth and MCP",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Boundary",
+        "Authenticates and scopes"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "Loyalty tools",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Resource",
+        "Enforces per-tool access"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Detect external agent"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "Identify the client"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "Connect with OAuth"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "Per-tool access"
+    },
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Observe, do not control"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Detect external agent",
+      "what": "The protected channel observes a new agent-shaped client. (discover)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. Identify the client",
+      "what": "CIMD is demonstrated as a mock; DCR or managed registration supplies client metadata. (register)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. Connect with OAuth",
+      "what": "PingOne authenticates the customer and binds consent to the connection. (authenticate)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. Per-tool access",
+      "what": "The external agent receives only the scope needed by the selected MCP tool. (authorize)",
+      "edges": [
+        3
+      ]
+    },
+    {
+      "title": "5. Observe, do not control",
+      "what": "The enterprise records the call without claiming visibility into hidden reasoning. (govern)",
+      "edges": [
+        4
+      ]
+    }
+  ]
+}

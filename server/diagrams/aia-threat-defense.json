@@ -1,0 +1,134 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-threat-defense",
+  "title": "AI Threat Defense",
+  "lede": "Send hostile or malformed requests through the same identity path and show exactly which boundary stops each attempt.",
+  "groups": {
+    "g1": {
+      "label": "Hostile prompt",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "Reasoning runtime",
+      "color": "green"
+    },
+    "g3": {
+      "label": "Gateway and policy",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "Protected tool",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Hostile prompt",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Input",
+        "Attempts instruction override"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "Reasoning runtime",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Agent",
+        "Cannot mint authority"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "Gateway and policy",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Boundary",
+        "Validates independent controls"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "Protected tool",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Resource",
+        "Runs only after permit"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Detect malicious instruction"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "Reject wrong audience"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "Reject scope escalation"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "Reject replay"
+    },
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Show reachability"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Detect malicious instruction",
+      "what": "The input attempts to override policy and expand the action. (discover)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. Reject wrong audience",
+      "what": "A token for another resource cannot authenticate at this boundary. (authenticate)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. Reject scope escalation",
+      "what": "Requested write scope is absent from delegated authority. (authorize)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. Reject replay",
+      "what": "A consumed approval receipt cannot authorize a second call. (govern)",
+      "edges": [
+        3
+      ]
+    },
+    {
+      "title": "5. Show reachability",
+      "what": "Evidence identifies which services were reached and which never saw the request. (govern)",
+      "edges": [
+        4
+      ]
+    }
+  ]
+}

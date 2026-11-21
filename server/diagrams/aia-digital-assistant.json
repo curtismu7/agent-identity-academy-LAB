@@ -1,0 +1,134 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-digital-assistant",
+  "title": "Customer Service Agent: Digital Assistant",
+  "lede": "Use an enterprise-controlled assistant to find cheap flights while keeping customer data, delegated authority, and high-impact actions bounded.",
+  "groups": {
+    "g1": {
+      "label": "Traveler",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "Digital Assistant",
+      "color": "green"
+    },
+    "g3": {
+      "label": "Authorize",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "Airline MCP",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Traveler",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Person",
+        "Defines task and limit"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "Digital Assistant",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Agent",
+        "Enterprise controlled"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "Authorize",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Policy",
+        "Checks mandate per action"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "Airline MCP",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Resource",
+        "Searches or books"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Assign the task"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "Prove identities"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "Search within mandate"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "Escalate booking"
+    },
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Record outcome"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Assign the task",
+      "what": "The app records the assistant, customer relationship, destination, price ceiling, and schedule. (register)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. Prove identities",
+      "what": "The customer and workload identity remain distinct in the delegated chain. (authenticate)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. Search within mandate",
+      "what": "Read-only flight searches are permitted under the declared task. (authorize)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. Escalate booking",
+      "what": "A purchase cannot proceed on the assistant’s preference alone. (authorize)",
+      "edges": [
+        3
+      ]
+    },
+    {
+      "title": "5. Record outcome",
+      "what": "Approval, booking result, and agent identity share one evidence chain. (govern)",
+      "edges": [
+        4
+      ]
+    }
+  ]
+}

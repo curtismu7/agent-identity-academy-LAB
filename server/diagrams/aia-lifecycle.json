@@ -1,0 +1,122 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-lifecycle",
+  "title": "Agent Detection, Lifecycle, and Revocation",
+  "lede": "Move a detected agent into governed inventory, relate its owner, revoke the bounded demo identity, and prove the next call fails closed.",
+  "groups": {
+    "g1": {
+      "label": "Observed agent",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "Agent record",
+      "color": "green"
+    },
+    "g3": {
+      "label": "Lifecycle action",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "Protected retry",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Observed agent",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Signal",
+        "Starts unknown"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "Agent record",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Inventory",
+        "Gets owner and state"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "Lifecycle action",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Control",
+        "Suspends or revokes"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "Protected retry",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Boundary",
+        "Fails closed"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Observe unknown agent"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "Register and relate"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "Revoke demo identity"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "Deny next attempt"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Observe unknown agent",
+      "what": "Traffic produces an agent signal without assumed ownership. (discover)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. Register and relate",
+      "what": "The agent gains an owner, category, and lifecycle record. (register)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. Revoke demo identity",
+      "what": "A bounded lifecycle action changes only the run-owned agent. (govern)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. Deny next attempt",
+      "what": "The same protected request now fails before tool execution. (govern)",
+      "edges": [
+        3
+      ]
+    }
+  ]
+}

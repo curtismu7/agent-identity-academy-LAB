@@ -1,0 +1,163 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-stage-model",
+  "title": "The agent identity lifecycle",
+  "lede": "Every lesson walks the same five questions: where is the agent, who owns it, is it genuine, what can it do, and can we prove and stop it. Each lesson activates only the stages it touches.",
+  "groups": {
+    "agent": {
+      "label": "The agent",
+      "color": "dark"
+    },
+    "lifecycle": {
+      "label": "The five stages",
+      "color": "blue"
+    },
+    "outcome": {
+      "label": "The outcome",
+      "color": "green"
+    }
+  },
+  "nodes": [
+    {
+      "id": "agent",
+      "label": "The agent",
+      "group": "agent",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "unknown until observed"
+      ]
+    },
+    {
+      "id": "s1",
+      "label": "Discover",
+      "group": "lifecycle",
+      "x": 320,
+      "y": 240,
+      "sub": [
+        "Where are the agents?"
+      ]
+    },
+    {
+      "id": "s2",
+      "label": "Register",
+      "group": "lifecycle",
+      "x": 530,
+      "y": 240,
+      "sub": [
+        "Who owns each identity?"
+      ]
+    },
+    {
+      "id": "s3",
+      "label": "Authenticate",
+      "group": "lifecycle",
+      "x": 740,
+      "y": 240,
+      "sub": [
+        "Is the identity genuine?"
+      ]
+    },
+    {
+      "id": "s4",
+      "label": "Authorize",
+      "group": "lifecycle",
+      "x": 950,
+      "y": 240,
+      "sub": [
+        "What can it do?"
+      ]
+    },
+    {
+      "id": "s5",
+      "label": "Govern",
+      "group": "lifecycle",
+      "x": 1160,
+      "y": 240,
+      "sub": [
+        "Can we prove and stop it?"
+      ]
+    },
+    {
+      "id": "evidence",
+      "label": "Evidence timeline",
+      "group": "outcome",
+      "x": 1450,
+      "y": 240,
+      "sub": [
+        "who acted, under whose authority",
+        "what was allowed, what happened"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "agent",
+      "target": "s1",
+      "label": "first observation"
+    },
+    {
+      "source": "s1",
+      "target": "s2",
+      "label": "Discover → Register"
+    },
+    {
+      "source": "s2",
+      "target": "s3",
+      "label": "Register → Authenticate"
+    },
+    {
+      "source": "s3",
+      "target": "s4",
+      "label": "Authenticate → Authorize"
+    },
+    {
+      "source": "s4",
+      "target": "s5",
+      "label": "Authorize → Govern"
+    },
+    {
+      "source": "s5",
+      "target": "evidence",
+      "label": "proof"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Discover",
+      "what": "Where are the agents? Traffic, signals and classification produce the first evidence.",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "Register",
+      "what": "Who owns each identity? A known agent gains an owner and a bounded relationship.",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "Authenticate",
+      "what": "Is the identity genuine? Person and agent identities are proven and preserved.",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "Authorize",
+      "what": "What can it do? Policy, consent, scope, audience and Privilege bound the action.",
+      "edges": [
+        3
+      ]
+    },
+    {
+      "title": "Govern",
+      "what": "Can we prove and stop it? Audit, lifecycle and revocation close the loop.",
+      "edges": [
+        4,
+        5
+      ]
+    }
+  ]
+}

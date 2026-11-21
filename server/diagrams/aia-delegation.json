@@ -1,0 +1,122 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-delegation",
+  "title": "OAuth Delegated Agent Access",
+  "lede": "Watch a customer remain the subject while the acting agent receives narrower authority for one resource and task.",
+  "groups": {
+    "g1": {
+      "label": "Customer",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "Digital Assistant",
+      "color": "green"
+    },
+    "g3": {
+      "label": "PingOne",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "MCP tool",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Customer",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Person",
+        "Token subject"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "Digital Assistant",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Agent",
+        "Token actor"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "PingOne",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Identity",
+        "Mints delegated token"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "MCP tool",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Resource",
+        "Accepts narrow scope"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Customer subject"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "Agent actor"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "Token exchange"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "Attributable result"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Customer subject",
+      "what": "The BFF retrieves the customer’s server-side token. (authenticate)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. Agent actor",
+      "what": "The controlled assistant proves its own client identity. (authenticate)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. Token exchange",
+      "what": "PingOne mints a resource-specific delegated token. (authorize)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. Attributable result",
+      "what": "The tool result stays connected to both customer and acting agent. (govern)",
+      "edges": [
+        3
+      ]
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-landscape",
+  "title": "Agent Landscape and Identity",
+  "lede": "Place every agent in the right category before discussing controls: who owns it, where it runs, whose authority it carries, and which boundary the enterprise can enforce.",
+  "groups": {
+    "g1": {
+      "label": "Customer",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "Identity candidate",
+      "color": "green"
+    },
+    "g3": {
+      "label": "Agent IAM core",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "Protected service",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Customer",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Person",
+        "Owns the intent"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "Identity candidate",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Agent",
+        "Ownership is not assumed"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "Agent IAM core",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Boundary",
+        "Registers and relates identity"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "Protected service",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Resource",
+        "Accepts governed access only"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Observe the agent"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "Classify the runtime"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "Relate ownership"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "Set the boundary"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Observe the agent",
+      "what": "Traffic reveals an agent-shaped client at the customer channel. (discover)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. Classify the runtime",
+      "what": "The runtime and owner separate a Personal Agent from an Enterprise Agent. (discover)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. Relate ownership",
+      "what": "A known agent gets an identifier, owner, and bounded relationship to a person. (register)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. Set the boundary",
+      "what": "The protected service refuses to infer trust from the model or user interface. (register)",
+      "edges": [
+        3
+      ]
+    }
+  ]
+}

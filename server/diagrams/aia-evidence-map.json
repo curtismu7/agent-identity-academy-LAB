@@ -1,0 +1,134 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-evidence-map",
+  "title": "Evidence Timeline and Ping Product Map",
+  "lede": "Read the complete story from discovery and identity through delegation, policy, approval, protocol execution, and governance evidence.",
+  "groups": {
+    "g1": {
+      "label": "Person and agent",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "Tokens and policy",
+      "color": "green"
+    },
+    "g3": {
+      "label": "MCP and A2A",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "Audit timeline",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Person and agent",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Identity",
+        "Who acted"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "Tokens and policy",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Authority",
+        "What was allowed"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "MCP and A2A",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Execution",
+        "What ran"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "Audit timeline",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Evidence",
+        "What can be proved"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Where is the agent?"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "Who owns it?"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "Is it genuine?"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "What can it do?"
+    },
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "What did it do?"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Where is the agent?",
+      "what": "Discovery evidence names the channel, runtime, and initial classification. (discover)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. Who owns it?",
+      "what": "Registration evidence relates identity, owner, and lifecycle state. (register)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. Is it genuine?",
+      "what": "Authentication and delegation preserve person and agent identities. (authenticate)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. What can it do?",
+      "what": "Policy, consent, scope, audience, and Privilege set action boundaries. (authorize)",
+      "edges": [
+        3
+      ]
+    },
+    {
+      "title": "5. What did it do?",
+      "what": "Protocol, tool, lifecycle, and audit events complete the accountable story. (govern)",
+      "edges": [
+        4
+      ]
+    }
+  ]
+}

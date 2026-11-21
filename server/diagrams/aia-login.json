@@ -1,0 +1,122 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-login",
+  "title": "PingOne Login, OIDC, and PKCE",
+  "lede": "Follow the customer from authorization redirect to a server-side session while the browser receives no reusable bearer token.",
+  "groups": {
+    "g1": {
+      "label": "Customer",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "Browser app",
+      "color": "green"
+    },
+    "g3": {
+      "label": "PingOne",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "BFF",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Customer",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Person",
+        "Starts sign-in"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "Browser app",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Client",
+        "Uses PKCE"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "PingOne",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Identity",
+        "Authenticates the person"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "BFF",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Session",
+        "Keeps tokens server-side"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Authorization request"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "PingOne sign-in"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "Server-side exchange"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "Session established"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Authorization request",
+      "what": "The browser starts an OIDC authorization-code flow with PKCE. (authenticate)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. PingOne sign-in",
+      "what": "PingOne authenticates the customer and returns a one-time code. (authenticate)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. Server-side exchange",
+      "what": "The BFF redeems the code and does not return tokens to browser JavaScript. (authenticate)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. Session established",
+      "what": "The application records a bounded authenticated session. (govern)",
+      "edges": [
+        3
+      ]
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-a2a",
+  "title": "A2A Agent Delegation",
+  "lede": "Watch a primary agent discover a specialist, send a task over A2A, and preserve customer authority through a nested delegation chain.",
+  "groups": {
+    "g1": {
+      "label": "Banking planner",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "A2A",
+      "color": "green"
+    },
+    "g3": {
+      "label": "Investment specialist",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "Portfolio MCP",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Banking planner",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Agent 1",
+        "Routes the customer task"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "A2A",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Protocol",
+        "Discovers and sends"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "Investment specialist",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Agent 2",
+        "Uses nested authority"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "Portfolio MCP",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Resource",
+        "Returns protected data"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Discover Agent Card"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "Exchange for specialist"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "Evaluate chain"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "Send A2A task"
+    },
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Return evidence"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Discover Agent Card",
+      "what": "The planner learns the specialist endpoint, skills, and security requirements. (discover)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. Exchange for specialist",
+      "what": "Nested delegation preserves the customer and both acting agents. (authenticate)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. Evaluate chain",
+      "what": "Policy checks the user, both agent identities, action, scope, and chain depth. (authorize)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. Send A2A task",
+      "what": "The planner sends the bounded task and specialist token over A2A. (authorize)",
+      "edges": [
+        3
+      ]
+    },
+    {
+      "title": "5. Return evidence",
+      "what": "The specialist result returns without returning a token across the wire. (govern)",
+      "edges": [
+        4
+      ]
+    }
+  ]
+}

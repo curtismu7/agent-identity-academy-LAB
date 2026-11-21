@@ -1,0 +1,122 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-authorize",
+  "title": "PingOne Authorize: Permit and Deny",
+  "lede": "Compare two agent actions at the same enforcement point so the customer sees policy—not model preference—decide what proceeds.",
+  "groups": {
+    "g1": {
+      "label": "Customer",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "Digital Assistant",
+      "color": "green"
+    },
+    "g3": {
+      "label": "PingOne Authorize",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "Gateway",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Customer",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Person",
+        "Owns delegated authority"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "Digital Assistant",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Agent",
+        "Requests actions"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "PingOne Authorize",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Policy",
+        "Returns decision"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "Gateway",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Boundary",
+        "Enforces result"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Same identities"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "Permit account read"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "Deny large transfer"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "Enforce both"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Same identities",
+      "what": "Both requests carry the same customer and agent relationship. (authenticate)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. Permit account read",
+      "what": "The read action matches scope and policy context. (authorize)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. Deny large transfer",
+      "what": "The transfer exceeds the policy threshold. (authorize)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. Enforce both",
+      "what": "The gateway dispatches the read and blocks the transfer before tool execution. (govern)",
+      "edges": [
+        3
+      ]
+    }
+  ]
+}

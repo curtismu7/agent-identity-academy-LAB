@@ -1,0 +1,134 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-privilege-mcp",
+  "title": "Privilege MCP Protection",
+  "lede": "Open a time-bound path to a protected MCP tool while keeping the underlying credential away from the agent and browser.",
+  "groups": {
+    "g1": {
+      "label": "Controlled agent",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "Privilege door",
+      "color": "green"
+    },
+    "g3": {
+      "label": "MCP relay",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "Privileged target",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Controlled agent",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Agent",
+        "Requests protected tool"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "Privilege door",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Boundary",
+        "Brokers temporary access"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "MCP relay",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Protocol",
+        "Carries bounded call"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "Privileged target",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Resource",
+        "Credential stays isolated"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Discover protected door"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "Establish relay session"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "List protected tools"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "Invoke through relay"
+    },
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "End and audit"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Discover protected door",
+      "what": "The client reads protected-resource metadata and the authorization requirement. (discover)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. Establish relay session",
+      "what": "The BFF completes the bounded connection without exposing credentials to the browser. (authenticate)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. List protected tools",
+      "what": "Only tools available through the active door are presented. (authorize)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. Invoke through relay",
+      "what": "The protected action executes inside the bounded session. (authorize)",
+      "edges": [
+        3
+      ]
+    },
+    {
+      "title": "5. End and audit",
+      "what": "The temporary session closes and its evidence remains attributable. (govern)",
+      "edges": [
+        4
+      ]
+    }
+  ]
+}

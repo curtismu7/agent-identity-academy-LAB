@@ -1,0 +1,122 @@
+{
+  "schema": "diagram-studio/1",
+  "id": "aia-mcp",
+  "title": "MCP Discovery and Tool Execution",
+  "lede": "Separate discovering what a tool can do from proving that a specific invocation is authenticated, authorized, and attributable.",
+  "groups": {
+    "g1": {
+      "label": "Controlled agent",
+      "color": "blue"
+    },
+    "g2": {
+      "label": "MCP",
+      "color": "green"
+    },
+    "g3": {
+      "label": "Agent Gateway",
+      "color": "amber"
+    },
+    "g4": {
+      "label": "Tool server",
+      "color": "red"
+    }
+  },
+  "nodes": [
+    {
+      "id": "a1",
+      "label": "Controlled agent",
+      "group": "g1",
+      "x": 80,
+      "y": 240,
+      "sub": [
+        "Agent",
+        "Requests capability"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "MCP",
+      "group": "g2",
+      "x": 330,
+      "y": 240,
+      "sub": [
+        "Protocol",
+        "Describes tools"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "Agent Gateway",
+      "group": "g3",
+      "x": 580,
+      "y": 240,
+      "sub": [
+        "Boundary",
+        "Validates and authorizes"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "Tool server",
+      "group": "g4",
+      "x": 830,
+      "y": 240,
+      "sub": [
+        "Resource",
+        "Executes allowed call"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "label": "Initialize MCP"
+    },
+    {
+      "source": "a2",
+      "target": "a3",
+      "label": "List tools"
+    },
+    {
+      "source": "a3",
+      "target": "a4",
+      "label": "Check invocation"
+    },
+    {
+      "source": "a4",
+      "target": "a1",
+      "label": "Return and audit"
+    }
+  ],
+  "steps": [
+    {
+      "title": "1. Initialize MCP",
+      "what": "The client and server establish protocol capabilities. (discover)",
+      "edges": [
+        0
+      ]
+    },
+    {
+      "title": "2. List tools",
+      "what": "The agent receives names, descriptions, and input schemas. (discover)",
+      "edges": [
+        1
+      ]
+    },
+    {
+      "title": "3. Check invocation",
+      "what": "Gateway and policy validate identity, scope, tool, and arguments. (authorize)",
+      "edges": [
+        2
+      ]
+    },
+    {
+      "title": "4. Return and audit",
+      "what": "The tool result is returned with correlated execution evidence. (govern)",
+      "edges": [
+        3
+      ]
+    }
+  ]
+}

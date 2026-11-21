@@ -1,0 +1,475 @@
+{
+  "schema": "demo-content-pack/1",
+  "id": "agent-identity-academy",
+  "title": "Agent Identity Academy",
+  "version": "0.1.0",
+  "demo": {
+    "id": "agent-identity-academy",
+    "name": "Agent Identity Academy",
+    "catalog": "D142",
+    "baseUrl": "http://localhost:7831",
+    "doctor": "/api/health",
+    "tags": [
+      "agent-identity",
+      "ai-agent-security",
+      "learning",
+      "mock-only"
+    ]
+  },
+  "glossary": [
+    {
+      "id": "lifecycle",
+      "term": "Agent identity lifecycle",
+      "definition": "Discover: Where are the agents? Register: Who owns each identity? Authenticate: Is the identity genuine? Authorize: What can it do? Govern: Can we prove and stop it?",
+      "aliases": [
+        "five stages",
+        "stage model"
+      ]
+    },
+    {
+      "id": "sub-act",
+      "term": "sub and act",
+      "definition": "sub names the person on whose behalf a call is made; act names the agent that acts. Delegation keeps both visible: the customer remains the subject while the agent is the actor, and neither impersonates the other.",
+      "aliases": [
+        "actor chain",
+        "delegation claims"
+      ]
+    },
+    {
+      "id": "token-exchange",
+      "term": "Token exchange (RFC 8693)",
+      "definition": "The OAuth grant that mints a narrower delegated token: audience rebinds to the target resource, scope narrows to what the hop needs, lifetime shortens, and act records the acting agent.",
+      "aliases": [
+        "RFC 8693",
+        "delegated token"
+      ]
+    },
+    {
+      "id": "personal-agent",
+      "term": "Personal Agent",
+      "definition": "An external agent the customer owns and the enterprise does not control (a consumer AI assistant). The enterprise controls identification, connection, consent and per-tool reach — never the reasoning runtime.",
+      "aliases": [
+        "consumer agent"
+      ]
+    },
+    {
+      "id": "task-mandate",
+      "term": "Task mandate",
+      "definition": "The bounded task an enterprise agent is given: what it may do, what ceiling it must respect, and where it must stop and ask. Enterprise control does not mean unlimited authority.",
+      "aliases": [
+        "mandate"
+      ]
+    },
+    {
+      "id": "human-approval",
+      "term": "Human approval (HITL)",
+      "definition": "A high-impact action pauses; approval arrives through a channel the agent does not own (CIBA or MFA); the receipt is bound to the exact intent and consumed once, so a replay is refused.",
+      "aliases": [
+        "HITL",
+        "CIBA"
+      ]
+    },
+    {
+      "id": "evidence-timeline",
+      "term": "Evidence timeline",
+      "definition": "The correlated audit story: who acted (sub + act), under whose authority (token + policy decision), what ran (protocol, tool), and what can be proved at each lifecycle stage.",
+      "aliases": [
+        "audit evidence"
+      ]
+    },
+    {
+      "id": "privilege-door",
+      "term": "Privilege door",
+      "definition": "The PingOne Privilege brokered entry to a protected MCP tool: a time-bound session is opened, the protected call runs inside it, and the underlying credential never reaches the agent or the browser.",
+      "aliases": [
+        "privileged session"
+      ]
+    },
+    {
+      "id": "threat-defense",
+      "term": "Threat defense boundaries",
+      "definition": "Prompt injection, replay, scope escalation and audience mismatch each stop at a different observable boundary. The model’s mistake cannot manufacture authority.",
+      "aliases": [
+        "attack boundaries"
+      ]
+    },
+    {
+      "id": "agent-lifecycle",
+      "term": "Lifecycle and revocation",
+      "definition": "A detected agent moves from unknown to known (register with an owner) to stopped (revoke). The proof of governance is the next call failing closed.",
+      "aliases": [
+        "revocation"
+      ]
+    },
+    {
+      "id": "policy-decision",
+      "term": "Policy decision",
+      "definition": "PingOne Authorize evaluates the action independently of the agent: PERMIT or DENY with a reason and obligations, enforced by the gateway before the tool runs. The agent cannot argue with it.",
+      "aliases": [
+        "permit deny"
+      ]
+    },
+    {
+      "id": "a2a-delegation",
+      "term": "A2A delegation",
+      "definition": "Agent2Agent task handoff: the primary agent discovers the specialist’s Agent Card and exchanges authority for it. The act chain nests (specialist acts for planner acts for customer) and every hop narrows scope.",
+      "aliases": [
+        "agent2agent",
+        "agent card"
+      ]
+    },
+    {
+      "id": "ciba",
+      "term": "CIBA",
+      "definition": "Client Initiated Backchannel Authentication: the agent’s high-impact request triggers a push to the customer’s registered channel; approval comes back out-of-band and is bound to the exact intent.",
+      "aliases": [
+        "backchannel auth"
+      ]
+    },
+    {
+      "id": "mcp-discovery",
+      "term": "MCP discovery",
+      "definition": "MCP initialize and tools/list tell an agent what a tool is and what schema it accepts. That is discovery evidence; the gateway and policy decision on tools/call is the execution authority.",
+      "aliases": [
+        "tools list"
+      ]
+    },
+    {
+      "id": "oidc-pkce",
+      "term": "OIDC with PKCE",
+      "definition": "The human sign-in flow: authorization-code with a code challenge, the exchange done server-side in the BFF, tokens never handed to browser JavaScript.",
+      "aliases": [
+        "sign-in flow"
+      ]
+    },
+    {
+      "id": "bff-token-custody",
+      "term": "BFF token custody",
+      "definition": "The backend-for-frontend holds the user’s tokens in the server-side session; the browser holds only an HttpOnly cookie and every downstream hop spends tokens from custody.",
+      "aliases": [
+        "token custody"
+      ]
+    },
+    {
+      "id": "agent-landscape",
+      "term": "Agent landscape",
+      "definition": "Classify before trusting: who owns the agent, where it runs, whose authority it carries. Consumer, enterprise, employee and third-party each get a different control pattern.",
+      "aliases": [
+        "classification"
+      ]
+    },
+    {
+      "id": "agent-classification",
+      "term": "Agent classification",
+      "definition": "The first evidence step: runtime and owner separate a Personal Agent from an Enterprise Agent from an employee agent from a third-party embedded agent.",
+      "aliases": [
+        "agent taxonomy"
+      ]
+    },
+    {
+      "id": "cimd",
+      "term": "CIMD",
+      "definition": "Client-ID Metadata Discovery: a client identifies itself by publishing metadata at a URL. Demonstrated here as a mock; PingOne does not support CIMD, so DCR or managed registration supplies the metadata.",
+      "aliases": [
+        "client metadata"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "academy-proto",
+      "title": "Agent Identity Academy lesson prototype (AI-DEMO2 static Academy, rewritten customer-neutral)",
+      "url": "https://academy-source.invalid/agent-identity",
+      "kind": "product-doc",
+      "use": "The 13 lessons, their actors, frames and evidence shapes.",
+      "status": "read",
+      "checked": "2026-11-20"
+    }
+  ],
+  "cards": [
+    {
+      "id": "concept-lifecycle",
+      "label": "Start: the five lifecycle questions",
+      "description": "Where are the agents? Who owns each identity? Is the identity genuine? What can it do? Can we prove and stop it?",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "lifecycle"
+      ]
+    },
+    {
+      "id": "lesson-landscape",
+      "label": "01. Agent landscape — CIAM and Workforce",
+      "description": "The audience can name the agent, its owner, and the first enforceable trust boundary.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "agent-landscape",
+        "agent-classification"
+      ],
+      "story": "S01"
+    },
+    {
+      "id": "lesson-login",
+      "label": "02. Login, OIDC and PKCE — Human identity",
+      "description": "The audience sees where PingOne proves the person and where the BFF takes custody of tokens.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "oidc-pkce",
+        "bff-token-custody"
+      ],
+      "story": "S02"
+    },
+    {
+      "id": "lesson-delegation",
+      "label": "03. Delegated access — On-behalf-of access",
+      "description": "The audience can explain sub, act, audience, and scope without calling delegation impersonation.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "token-exchange",
+        "sub-act"
+      ],
+      "story": "S03"
+    },
+    {
+      "id": "lesson-personal-agent",
+      "label": "04. Personal Agent — Consumer & Partner Agent",
+      "description": "The audience sees how an unknown external agent becomes a bounded, observable channel to protected tools.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "personal-agent",
+        "cimd"
+      ],
+      "story": "S04"
+    },
+    {
+      "id": "lesson-digital-assistant",
+      "label": "05. Digital Assistant — Enterprise / Workload Agent",
+      "description": "The audience sees an enterprise agent automate service without inheriting unrestricted customer power.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "task-mandate",
+        "ciba"
+      ],
+      "story": "S05"
+    },
+    {
+      "id": "lesson-mcp",
+      "label": "06. MCP tools — Protected resource access",
+      "description": "The audience can distinguish an MCP schema from permission to execute it.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "mcp-discovery"
+      ],
+      "story": "S06"
+    },
+    {
+      "id": "lesson-authorize",
+      "label": "07. Authorize decisions — Fine-grained authorization",
+      "description": "The audience sees a policy reason and the gateway enforce both PERMIT and DENY.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "policy-decision"
+      ],
+      "story": "S07"
+    },
+    {
+      "id": "lesson-human-approval",
+      "label": "08. Human approval — Consent and step-up",
+      "description": "The audience sees approval as a cryptographically bounded event, not a checkbox supplied by the agent.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "human-approval"
+      ],
+      "story": "S08"
+    },
+    {
+      "id": "lesson-a2a",
+      "label": "09. A2A delegation — Workload Agent handoff",
+      "description": "The audience separates A2A conversation mechanics from OAuth authority and policy enforcement.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "a2a-delegation"
+      ],
+      "story": "S09"
+    },
+    {
+      "id": "lesson-privilege-mcp",
+      "label": "10. Privilege MCP — Protected MCP session",
+      "description": "The audience sees secretless privileged execution with a visible start, bounded session, and end.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "privilege-door"
+      ],
+      "story": "S10"
+    },
+    {
+      "id": "lesson-threat-defense",
+      "label": "11. Threat defense — Boundary enforcement",
+      "description": "The audience sees that model instructions cannot expand identity, scope, audience, or replay rights.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "threat-defense"
+      ],
+      "story": "S11"
+    },
+    {
+      "id": "lesson-lifecycle",
+      "label": "12. Lifecycle and revoke — Unknown to known",
+      "description": "The audience sees that agent identity has a manageable lifecycle independent of the model runtime.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "agent-lifecycle"
+      ],
+      "story": "S12"
+    },
+    {
+      "id": "lesson-evidence-map",
+      "label": "13. Evidence and products — All five stages",
+      "description": "The audience can point to proof for who acted, under whose authority, what was allowed, and what happened.",
+      "group": "concept",
+      "action": {
+        "type": "route",
+        "href": "/#lessons"
+      },
+      "terms": [
+        "evidence-timeline"
+      ],
+      "story": "S13"
+    },
+    {
+      "id": "ref-doctor",
+      "label": "Doctor and health",
+      "description": "Preflight checks and the demo-health/1 endpoint.",
+      "group": "setup",
+      "action": {
+        "type": "route",
+        "href": "/api/health"
+      }
+    }
+  ],
+  "stories": [
+    {
+      "id": "S01",
+      "title": "Agent landscape",
+      "say": "Start with classification. The control pattern changes when the customer owns the agent versus when the enterprise owns it."
+    },
+    {
+      "id": "S02",
+      "title": "Login, OIDC and PKCE",
+      "say": "The browser participates in the redirect, but the BFF owns the sensitive exchange and session."
+    },
+    {
+      "id": "S03",
+      "title": "Delegated access",
+      "say": "The customer remains visible in the chain; the agent gains only the authority required for this hop."
+    },
+    {
+      "id": "S04",
+      "title": "Personal Agent",
+      "say": "We do not control the Personal Agent. We control whether it can identify itself, connect, receive consent, and reach each protected tool."
+    },
+    {
+      "id": "S05",
+      "title": "Digital Assistant",
+      "say": "Enterprise control does not mean unlimited authority. The assistant gets a task, a ceiling, and an approval boundary."
+    },
+    {
+      "id": "S06",
+      "title": "MCP tools",
+      "say": "A tool appearing in tools/list is discovery evidence. The later policy decision is execution authority."
+    },
+    {
+      "id": "S07",
+      "title": "Authorize decisions",
+      "say": "The agent may request either action. Only the independently evaluated policy result reaches the protected tool."
+    },
+    {
+      "id": "S08",
+      "title": "Human approval",
+      "say": "The assistant cannot assert that consent exists. The customer proves approval through a separate trusted channel."
+    },
+    {
+      "id": "S09",
+      "title": "A2A delegation",
+      "say": "The Agent Card says how to talk to the specialist. OAuth and policy still decide what that specialist may do."
+    },
+    {
+      "id": "S10",
+      "title": "Privilege MCP",
+      "say": "The agent receives a result, not the credential. Privilege owns the protected connection and its lifetime."
+    },
+    {
+      "id": "S11",
+      "title": "Threat defense",
+      "say": "The lesson is not that the model never makes a mistake. The lesson is that its mistake cannot manufacture authority."
+    },
+    {
+      "id": "S12",
+      "title": "Lifecycle and revoke",
+      "say": "Blocking one call is not lifecycle management. Revocation changes what the identity can do on the next attempt."
+    },
+    {
+      "id": "S13",
+      "title": "Evidence and products",
+      "say": "Close on evidence, not architecture boxes. Every control should answer one customer question and point to its proof."
+    }
+  ],
+  "documents": [
+    {
+      "id": "talk-track",
+      "path": "docs/talk-track.md",
+      "title": "Talk track (generated from the story data)"
+    }
+  ]
+}
