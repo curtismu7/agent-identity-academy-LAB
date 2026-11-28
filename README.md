@@ -36,7 +36,7 @@ Then open it through the family lab proxy: **https://local.ping-devops.com:8443/
 
 ## Modes (rule 19)
 
-Mock is the only mode: this lab has **no live mode** — it contacts no tenant and no gateway in any mode, and the netguard refuses every non-loopback socket. The header's Mock/Real switch follows the family contract (`POST /api/mode`, `GET /api/info`): Real answers 409 with the honest reason and the toggle stays disabled unless the owner sets `AIA_MODE_REAL=1` — and even then Real only changes what the mode switch reports; the content is the same simulation, and the banner says so.
+Mock is the only mode: this lab has **no live mode** — it contacts no tenant and no gateway in any mode, and the netguard refuses every non-loopback socket. The header's Mock/Real switch follows the family contract (`POST /api/mode`, `GET /api/info`): Real answers 409 with the honest reason and the toggle stays disabled unless the owner sets `AIA_MODE_REAL=1` — and even then Real only changes what the mode switch reports; the content is the same simulation, and the REAL modal the page opens on says so.
 
 ## Layout
 

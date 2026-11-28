@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { cleanup, render, screen, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { waitFor } from "@testing-library/dom";
 import App from "./App";
@@ -58,7 +58,7 @@ function stubFetch({ shelfPayload, story = STORY, info } = {}) {
 }
 
 beforeEach(() => { window.location.hash = ""; });
-afterEach(() => { cleanup(); });
+afterEach(() => { cleanup(); sessionStorage.clear(); });
 
 describe("verification mark in the header", () => {
   it("shows this lab's own mark beside the Shelf link, and no other lab's", async () => {
@@ -88,17 +88,38 @@ describe("verification mark in the header", () => {
 });
 
 describe("the rule-19 Mock/Real toggle", () => {
-  it("the simulation banner renders first, above the title", async () => {
+  it("the page opens on a MOCK modal that says what is simulated, with no banner, and Got it closes it for the rest of the session", async () => {
     stubFetch({});
-    render(<App />);
-    const banner = await screen.findByTestId("banner");
-    expect(banner.textContent).toMatch(/SIMULATION/);
-    const first = banner.firstElementChild;
-    expect(first.dataset.testid).toBe("sim-banner");
-    // mock/real content is honest: the real banner only appears in real mode
+    const { unmount } = render(<App />);
+    const modal = await screen.findByTestId("mode-modal");
+    expect(modal.dataset.mode).toBe("mock");
+    expect(modal.textContent).toMatch(/MOCK/);
+    expect(modal.textContent).toMatch(/labelled mock value/);
+    expect(modal.textContent).toMatch(/no outbound network/i);
+    expect(modal.textContent).toMatch(/no token is issued or read/);
+    // the old banner is gone, and the intro paragraph it used to carry is still on the page
+    expect(screen.queryByTestId("banner")).toBeNull();
+    expect(screen.queryByTestId("sim-banner")).toBeNull();
     expect(screen.queryByTestId("real-banner")).toBeNull();
+    expect(document.querySelector(".banner")).toBeNull();
+    expect(await screen.findByText(STORY.intro)).toBeTruthy();
     // and a lesson actually renders
     expect(await screen.findByTestId("trust-path")).toBeTruthy();
+    fireEvent.click(screen.getByTestId("mode-modal-ok"));
+    expect(screen.queryByTestId("mode-modal")).toBeNull();
+    unmount();
+    render(<App />);
+    await screen.findByTestId("trust-path");
+    expect(screen.queryByTestId("mode-modal")).toBeNull();
+  });
+
+  it("when the server reports real the modal says REAL and that the lab has no live mode, so the content is the same simulation", async () => {
+    stubFetch({ info: { mode: "real", source: "real", simulated: true, realAvailable: true, realHint: "", title: "Agent Identity Academy", version: "0.1.0" } });
+    render(<App />);
+    await waitFor(() => expect(screen.getByTestId("mode-modal").dataset.mode).toBe("real"));
+    expect(screen.getByTestId("mode-modal").textContent).toMatch(/REAL/);
+    expect(screen.getByTestId("mode-modal").textContent).toMatch(/no live mode/i);
+    expect(screen.getByTestId("mode-modal").textContent).toMatch(/same simulation/);
   });
 
   it("Real is disabled with a how-to tooltip when realAvailable is false, and the server's 409 keeps Mock", async () => {
@@ -135,9 +156,9 @@ describe("the rule-19 Mock/Real toggle", () => {
     await user.selectOptions(within(bar).getByTestId("mode-select"), "real");
     const badge = await screen.findByTestId("mode-badge");
     expect(badge.textContent).toBe("real");
-    // the real banner appears and stays honest
-    expect(await screen.findByTestId("real-banner")).toBeTruthy();
-    expect(screen.getByTestId("real-banner").textContent).toMatch(/no live mode/i);
+    // the REAL modal appears (the mode changed, so MOCK being shown first does not hide it) and stays honest
+    await waitFor(() => expect(screen.getByTestId("mode-modal").dataset.mode).toBe("real"));
+    expect(screen.getByTestId("mode-modal").textContent).toMatch(/no live mode/i);
   });
 });
 

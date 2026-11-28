@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import TopMenu from "./top-menu/TopMenu.jsx";
 import HelpDialog from "./help-dialog/HelpDialog.jsx";
 import { HELP_SECTIONS } from "./helpContent";
-import Banner from "./components/Banner.jsx";
+import ModeModal from "./mode-modal/ModeModal.jsx";
 import TalkTrack from "./components/TalkTrack.jsx";
 import ShelfLink from "./components/ShelfLink.jsx";
 import ReleaseNotes from "./components/ReleaseNotes.jsx";
@@ -10,6 +10,12 @@ import VerifyMark from "./components/VerifyMark.jsx";
 import PatternDiagram from "./components/PatternDiagram.jsx";
 import { getJson, setMode } from "./api";
 import { workspaceId } from "./workspace";
+
+// The Real-or-mock modal replaced the simulation banners. The lab has no live mode: Real only means the mode switch reports "real", and the content stays the same simulation.
+const MODE_LINES = {
+  mock: "Everything in this lab is a labelled mock value for education: no tenant, no sign-in, no outbound network. Sample claims follow real token shapes, but no token is issued or read.",
+  real: "Real only means the mode switch reports Real: this lab has no live mode and contacts no tenant or gateway, so the content is the same simulation.",
+};
 
 const STAGE_ORDER = ["discover", "register", "authenticate", "authorize", "govern"];
 const STAGE_LABELS = Object.fromEntries(STAGE_ORDER.map((s) => [s, s[0].toUpperCase() + s.slice(1)]));
@@ -159,7 +165,7 @@ export default function App() {
         {notesOpen && <ReleaseNotes version={info?.version ? `v${info.version}` : ""} onClose={() => setNotesOpen(false)} />}
       </header>
       <main className="page">
-        <Banner story={story} mode={info?.mode} />
+        <p className="intro">{story.intro}</p>
         <p className="keys">Workspace {workspaceId()} · everything simulated · no tenant, no outbound network</p>
 
         <section className="maturity-rail" aria-label="Agent identity lifecycle" data-testid="stage-rail">
@@ -319,6 +325,7 @@ export default function App() {
         )}
         <HelpDialog isOpen={helpOpen} onClose={() => setHelpOpen(false)} sections={HELP_SECTIONS} docsUrl="https://github.com/curtismu7/agent-identity-academy-LAB#readme" />
       </main>
+      <ModeModal mode={info?.mode === "real" ? "real" : "mock"} lines={MODE_LINES} storageKey="aia-mode" />
     </div>
   );
 }
