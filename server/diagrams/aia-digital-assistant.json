@@ -2,7 +2,7 @@
   "schema": "diagram-studio/1",
   "id": "aia-digital-assistant",
   "title": "Customer Service Agent: Digital Assistant",
-  "lede": "Use an enterprise-controlled assistant to find cheap flights while keeping customer data, delegated authority, and high-impact actions bounded.",
+  "lede": "Use the enterprise-controlled AirGuard Airlines assistant to find cheap flights while keeping customer data, delegated authority, and high-impact actions bounded.",
   "groups": {
     "g1": {
       "label": "Traveler",
@@ -17,7 +17,7 @@
       "color": "amber"
     },
     "g4": {
-      "label": "Airline MCP",
+      "label": "AirGuard Airlines MCP",
       "color": "red"
     }
   },
@@ -57,7 +57,7 @@
     },
     {
       "id": "a4",
-      "label": "Airline MCP",
+      "label": "AirGuard Airlines MCP",
       "group": "g4",
       "x": 830,
       "y": 240,

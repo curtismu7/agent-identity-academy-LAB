@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- AirGuard Airlines (a fictional airline) is the default story: a fourth `airlines` pack is the default vertical, and the sample claims, tool names, scopes (`itinerary:read`, `refund:issue`) and lesson text that were banking wording now tell the airline story (itinerary read permitted, over-threshold refund denied). The retail, health and finance packs stay. Generated diagrams and the talk track were regenerated.
+
 ## 0.1.0 (2026-11-20)
 
 - New lab: the Agent Identity Academy as a standalone. 13 lessons, one per agent type and per control — Agent Landscape, OIDC/PKCE sign-in, OAuth delegated access (RFC 8693), the Personal Agent (consumer, CIMD mocked), the enterprise Digital Assistant (task mandate + CIBA step-up), MCP discovery vs execution, PingOne Authorize permit/deny, human approval (CIBA/HITL, replay-safe), A2A multi-agent delegation, Privilege MCP protection, AI threat defense, lifecycle and revocation, and the closing evidence/product map.

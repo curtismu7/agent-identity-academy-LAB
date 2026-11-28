@@ -17,7 +17,7 @@
       "color": "amber"
     },
     "g4": {
-      "label": "Transfer tool",
+      "label": "Refund tool",
       "color": "red"
     }
   },
@@ -57,7 +57,7 @@
     },
     {
       "id": "a4",
-      "label": "Transfer tool",
+      "label": "Refund tool",
       "group": "g4",
       "x": 830,
       "y": 240,
@@ -92,7 +92,7 @@
   "steps": [
     {
       "title": "1. Action requires approval",
-      "what": "Policy returns an escalation obligation for the transfer. (authorize)",
+      "what": "Policy returns an escalation obligation for the refund. (authorize)",
       "edges": [
         0
       ]

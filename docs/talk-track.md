@@ -14,7 +14,7 @@ One lesson per agent type and per control: who the agent is, who owns it, how it
 4. **The Personal Agent lesson.** Lesson 4. An agent we do not control. We control whether it can identify itself, connect, receive consent, and reach each protected tool. CIMD is mocked because PingOne does not support it yet.
 5. **The enterprise assistant gets a mandate, not a master key.** Lesson 5. Search within the task mandate; booking pauses for step-up. Enterprise control does not mean unlimited authority.
 6. **Discovery is not permission.** Lesson 6. A tool in tools/list is a schema. The later policy decision at the gateway is the execution authority. Two different evidence types.
-7. **Policy, not the model, decides.** Lesson 7. Same identities, two actions: the read is permitted, the over-ceiling transfer is denied. The agent cannot argue with a policy decision.
+7. **Policy, not the model, decides.** Lesson 7. Same identities, two actions: the read is permitted, the over-ceiling refund is denied. The agent cannot argue with a policy decision.
 8. **Human approval is a bounded event.** Lesson 8. CIBA or MFA reaches the customer on a channel the agent does not own; the receipt is single-use and replay-rejected. The agent cannot assert consent on the customer’s behalf.
 9. **Multi-agent hops narrow, never widen.** Lesson 9. A2A hands the task to a specialist through a nested exchange: the act chain grows, the scope shrinks. Each hop is attributable.
 10. **Privileged access stays secretless.** Lesson 10. The Privilege door brokers a time-bound session; the agent gets a result, never the credential.
