@@ -42,14 +42,14 @@ test('the four agent-type lessons are present: landscape, personal-agent, digita
 });
 
 test('sample claim shapes exist and are internally consistent (delegation story)', () => {
-  assert.equal(USER_TOKEN.sub, 'customer-1042');
-  assert.ok(USER_TOKEN.scope.includes('accounts:transfer'), 'the user starts with transfer rights');
-  assert.equal(AGENT_TOKEN.sub, 'banking-assistant');
+  assert.equal(USER_TOKEN.sub, 'member-1042');
+  assert.ok(USER_TOKEN.scope.includes('refund:issue'), 'the user starts with refund rights');
+  assert.equal(AGENT_TOKEN.sub, 'passenger-chat-agent');
   assert.equal(AGENT_TOKEN.scope, 'exchange', 'the agent itself holds only exchange');
-  assert.equal(EXCHANGED_TOKEN.sub, 'customer-1042', 'the customer stays the subject after exchange');
-  assert.match(EXCHANGED_TOKEN.act, /banking-assistant/, 'the actor claim names the agent');
-  assert.equal(EXCHANGED_TOKEN.scope, 'accounts:read', 'scope narrowed to one');
-  assert.ok(!('accounts:transfer' in EXCHANGED_TOKEN) && !EXCHANGED_TOKEN.scope.includes('transfer'), 'transfer rights dropped');
+  assert.equal(EXCHANGED_TOKEN.sub, 'member-1042', 'the customer stays the subject after exchange');
+  assert.match(EXCHANGED_TOKEN.act, /passenger-chat-agent/, 'the actor claim names the agent');
+  assert.equal(EXCHANGED_TOKEN.scope, 'itinerary:read', 'scope narrowed to one');
+  assert.ok(!('refund:issue' in EXCHANGED_TOKEN) && !EXCHANGED_TOKEN.scope.includes('refund'), 'refund rights dropped');
 });
 
 test('the delegation frames narrate that exact narrowing', () => {

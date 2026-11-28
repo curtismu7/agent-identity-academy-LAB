@@ -76,12 +76,12 @@
     {
       "source": "a2",
       "target": "a3",
-      "label": "Permit account read"
+      "label": "Permit itinerary read"
     },
     {
       "source": "a3",
       "target": "a4",
-      "label": "Deny large transfer"
+      "label": "Deny large refund"
     },
     {
       "source": "a4",
@@ -98,22 +98,22 @@
       ]
     },
     {
-      "title": "2. Permit account read",
+      "title": "2. Permit itinerary read",
       "what": "The read action matches scope and policy context. (authorize)",
       "edges": [
         1
       ]
     },
     {
-      "title": "3. Deny large transfer",
-      "what": "The transfer exceeds the policy threshold. (authorize)",
+      "title": "3. Deny large refund",
+      "what": "The refund exceeds the policy threshold. (authorize)",
       "edges": [
         2
       ]
     },
     {
       "title": "4. Enforce both",
-      "what": "The gateway dispatches the read and blocks the transfer before tool execution. (govern)",
+      "what": "The gateway dispatches the read and blocks the refund before tool execution. (govern)",
       "edges": [
         3
       ]

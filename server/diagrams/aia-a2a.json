@@ -5,7 +5,7 @@
   "lede": "Watch a primary agent discover a specialist, send a task over A2A, and preserve customer authority through a nested delegation chain.",
   "groups": {
     "g1": {
-      "label": "Banking planner",
+      "label": "Travel planner",
       "color": "blue"
     },
     "g2": {
@@ -13,24 +13,24 @@
       "color": "green"
     },
     "g3": {
-      "label": "Investment specialist",
+      "label": "Rebooking specialist",
       "color": "amber"
     },
     "g4": {
-      "label": "Portfolio MCP",
+      "label": "Rebooking MCP",
       "color": "red"
     }
   },
   "nodes": [
     {
       "id": "a1",
-      "label": "Banking planner",
+      "label": "Travel planner",
       "group": "g1",
       "x": 80,
       "y": 240,
       "sub": [
         "Agent 1",
-        "Routes the customer task"
+        "Routes the passenger task"
       ]
     },
     {
@@ -46,7 +46,7 @@
     },
     {
       "id": "a3",
-      "label": "Investment specialist",
+      "label": "Rebooking specialist",
       "group": "g3",
       "x": 580,
       "y": 240,
@@ -57,7 +57,7 @@
     },
     {
       "id": "a4",
-      "label": "Portfolio MCP",
+      "label": "Rebooking MCP",
       "group": "g4",
       "x": 830,
       "y": 240,

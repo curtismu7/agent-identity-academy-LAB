@@ -7,6 +7,8 @@ A standalone port of the Agent Identity Academy: **13 lessons, one per agent typ
 
 Every lesson walks the same five lifecycle stages — **Discover, Register, Authenticate, Authorize, Govern** — and activates only the stages it touches. The page shows: the stage rail, the lesson rail, the actors and trust boundary, a **frame-by-frame movie reel** with a per-frame evidence drawer (mock tokens in play, a **claim diff table** of what changed across the hop, and the redacted request/response), the frame-to-product map, and a **diagram-studio diagram** per lesson (ReactFlow: movable boxes, Simulate, Reset restores positions, speed control).
 
+The default story is **AirGuard Airlines**, a fictional airline: a passenger asks an assistant for an itinerary, a refund beyond the threshold is denied, a rebooking is handed to a specialist agent. The brand, agent id, client id and host come from the `airlines` pack in `server/src/cast.js` (the default); the retail, health and finance packs are kept in `cast.js` (`loadCast(file, vertical)`), though the page has no vertical selector.
+
 ## Source and honesty
 
 - **Derived from** the AI-DEMO2 static Academy prototype (`academy-identity-preview.html`), rewritten customer-neutral: every host is a reserved name (`*.invalid`), every token is a labelled mock sample (the sample issuer is `auth.example-idp.invalid`), and no tenant, client id or hostname from any real environment ships in this lab.
